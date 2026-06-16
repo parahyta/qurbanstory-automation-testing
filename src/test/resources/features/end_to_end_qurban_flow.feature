@@ -42,3 +42,14 @@ Feature: End-to-End Flow Pembelian Hewan Qurban Patungan
       | TC-CHK-04| BVA Min   | 812345678         | 812345678       | 9 digit, tepat minimum                     |
       | TC-CHK-05| BVA Max   | 812345678901234   | 812345678901234 | 15 digit, masih dalam batas (maxLength=15) |
       | TC-CHK-06| BVA Max+1 | 8123456789012345  | 812345678901234 | 16 digit dipotong ke 15 (maxLength)        |
+
+  Scenario: Proses Checkout dan Pembayaran menggunakan BCA Virtual Account
+    Given user has logged in and is on the checkout page for patungan product
+    And user inputs "081234567890" as the phone number in checkout form
+    And user adds pequrban name 6 times
+    And the pequrban counter should be "7 / 7 Orang" and the add button is hidden
+    When user clicks on Bayar Sekarang button
+    And user selects BCA Virtual Account payment method
+    And user completes the payment in the Midtrans simulator
+    And user checks the payment status
+    Then user should be redirected to the invoice page and see BERHASIL payment status
