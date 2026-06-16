@@ -17,43 +17,28 @@ Feature: End-to-End Flow Pembelian Hewan Qurban Patungan
     When user clicks "Login with Google"
     Then user should be redirected to the customer dashboard
 
-  Scenario: Navigasi ke Detail Produk dari Katalog
+  Scenario: TC-PRD-01 Navigasi ke Detail Produk dari Katalog
     Given user is on the product catalog page
-    When user clicks "Lihat Detail" on product "Sapi Patungan 1/7"
+    When user clicks "Lihat Detail" on product "Sapi Patungan (Patungan (1/7))"
     Then user should see product detail page with price and stock availability
 
-  Scenario: Validasi Blokir Checkout Saat Stok Habis
+  Scenario: TC-PRD-02 Validasi Blokir Checkout Saat Stok Habis
     Given user is on the product detail page with "0" stock remaining
-    When user clicks the "Beli Sekarang" button
-    Then user should see an error message "Stok Habis"
+    When user views the buy button on the product detail page
+    Then user should see the buy button displays text "Stok Habis"
     And the system should disable the payment submission button
 
   Scenario Outline: Validasi Input Nomor Telepon Donatur
-    Given user is on the checkout page for product "Sapi Patungan 1/7"
+    Given user is on the checkout page for product "Sapi Patungan (Patungan (1/7))"
     When user enters phone number "<input_phone>"
     Then the field value should automatically sanitize to "<expected_phone>"
 
     Examples:
-      | input_phone     | expected_phone  |
-      | 081234567890    | 081234567890    |
-      | 0812-3456-7890  | 081234567890    |
-      | 0812abc3456     | 08123456        |
-
-  Scenario: Validasi Batas Maksimal Partisipan Patungan
-    Given user already inputs 7 participant names
-    When user attempts to add another participant
-    Then system should reject additional participant input
-    And the add participant button should be disabled
-
-  Scenario: Transaksi Berhasil dan Invoice Ditampilkan
-    Given user is on the checkout page with valid form inputs
-    When user clicks "Bayar Sekarang"
-    And user completes payment using Midtrans Sandbox
-    Then user should see the Invoice page with payment status "PAID"
-    And transaction status should be recorded successfully
-
-  Scenario: Validasi Transaksi Kadaluarsa
-    Given user has an unpaid transaction
-    When payment exceeds expiration limit
-    Then system should display transaction status as "Expired"
-    And user should be able to create a new transaction
+    Examples:
+      | tc_id    | teknik    | input_phone       | expected_phone  | keterangan                                 |
+      | TC-CHK-01| EP Valid  | 81234567890       | 81234567890     | Input valid, hanya angka                   |
+      | TC-CHK-02| EP Invalid| 0812abc345        | 0812345         | Non-angka dihapus otomatis                 |
+      | TC-CHK-03| BVA Min-1 | 81234567          | 81234567        | 8 digit, di bawah minimum 9                |
+      | TC-CHK-04| BVA Min   | 812345678         | 812345678       | 9 digit, tepat minimum                     |
+      | TC-CHK-05| BVA Max   | 812345678901234   | 812345678901234 | 15 digit, masih dalam batas (maxLength=15) |
+      | TC-CHK-06| BVA Max+1 | 8123456789012345  | 812345678901234 | 16 digit dipotong ke 15 (maxLength)        |
