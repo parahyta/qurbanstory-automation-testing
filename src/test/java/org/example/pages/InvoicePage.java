@@ -33,4 +33,47 @@ public class InvoicePage {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='BERHASIL']")));
         return status.isDisplayed();
     }
+
+    public boolean isInvoiceNumberDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'ORD-')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isTransactionAmountDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'Rp')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isPaymentMethodDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[text()='Virtual Account']")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isTransactionDateDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'-')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isPaymentStatusExpired() {
+        WebElement status = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[text()='KADALUARSA']")
+                )
+        );
+
+        return status.isDisplayed();
+    }
+
 }

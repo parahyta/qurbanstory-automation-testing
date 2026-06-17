@@ -49,6 +49,38 @@ public class PaymentSteps {
         checkoutPage.clickTambahNamaPequrban(times);
     }
 
+    @Then("the pequrban counter should be {string}")
+    public void thePequrbanCounterShouldBe(String expectedCounterText) {
+        Assertions.assertTrue(
+                checkoutPage.isCounterDisplayed(expectedCounterText),
+                "Counter tidak sesuai"
+        );
+    }
+
+    @Then("the add button should be hidden")
+    public void theAddButtonShouldBeHidden() {
+        Assertions.assertTrue(
+                checkoutPage.isTambahButtonHidden(),
+                "Tombol tambah masih tampil"
+        );
+    }
+
+    @Then("the pequrban counter should remain {string}")
+    public void thePequrbanCounterShouldRemain(String expectedCounterText) {
+        Assertions.assertTrue(
+                checkoutPage.isCounterDisplayed(expectedCounterText),
+                "Counter berubah padahal kuota penuh"
+        );
+    }
+
+    @Then("user should not be able to add more pequrban names")
+    public void userShouldNotBeAbleToAddMorePequrbanNames() {
+        Assertions.assertTrue(
+                checkoutPage.isTambahButtonHidden(),
+                "User masih bisa menambah pequrban padahal kuota penuh"
+        );
+    }
+
     @And("the pequrban counter should be {string} and the add button is hidden")
     public void thePequrbanCounterShouldBeAndAddButtonIsHidden(String expectedCounterText) {
         Assertions.assertTrue(checkoutPage.isCounterDisplayed(expectedCounterText), "Counter " + expectedCounterText + " tidak tampil");

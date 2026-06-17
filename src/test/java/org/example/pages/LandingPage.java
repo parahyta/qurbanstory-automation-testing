@@ -17,6 +17,9 @@ public class LandingPage {
     private By lihatProdukButton =
             By.xpath("//button[contains(text(),'Lihat Produk')]");
 
+    private By loginButton =
+            By.xpath("//a[@href='/login']");
+
     public LandingPage() {
         this.driver = DriverManager.getDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -32,5 +35,9 @@ public class LandingPage {
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    public void clickLogin() {
+        driver.findElement(loginButton).click();
     }
 }

@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import org.example.pages.LandingPage;
 import org.example.pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
+import org.example.utils.DriverManager;
 
 public class LandingLoginSteps {
 
@@ -29,6 +30,10 @@ public class LandingLoginSteps {
             landingPage.clickLihatProduk();
         }
 
+        else if (buttonName.equals("Login")) {
+            landingPage.clickLogin();
+        }
+
         else if (buttonName.equals("Login with Google")) {
             loginPage.clickGoogleLogin();
         }
@@ -39,6 +44,16 @@ public class LandingLoginSteps {
         Assertions.assertTrue(
                 landingPage.getCurrentUrl().contains("produk"),
                 "User tidak berhasil masuk ke halaman produk"
+        );
+    }
+
+    @Then("user should be redirected to the login page")
+    public void userShouldBeRedirectedToLoginPage() {
+        String currentUrl = DriverManager.getDriver().getCurrentUrl();
+
+        Assertions.assertTrue(
+                currentUrl.contains("/login"),
+                "User tidak diarahkan ke halaman login"
         );
     }
 
