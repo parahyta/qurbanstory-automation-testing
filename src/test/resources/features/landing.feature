@@ -9,3 +9,8 @@ Feature: Landing Page Navigation
     Given user is on the landing page
     When user clicks "Lihat Produk"
     Then user should be redirected to the product catalog page
+
+  Scenario: TC-LND-02 Navigasi dari Landing Page ke Halaman Login
+    Given user is on the landing page
+    When user clicks "Login"
+    Then user should be redirected to the login page
