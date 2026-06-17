@@ -2,8 +2,10 @@
 @checkout
 Feature: Checkout Phone Validation
 
-  Scenario Outline: Validasi Input Nomor Telepon Donatur
+  Background:
     Given user is on the checkout page for product "Sapi Patungan (Patungan (1/7))"
+
+  Scenario Outline: Validasi Input Nomor Telepon Donatur
     When user enters phone number "<input_phone>"
     Then the field value should automatically sanitize to "<expected_phone>"
 
@@ -15,4 +17,3 @@ Feature: Checkout Phone Validation
       | TC-CHK-04 | BVA Min    | 812345678        | 812345678       | 9 digit, tepat minimum                     |
       | TC-CHK-05 | BVA Max    | 812345678901234  | 812345678901234 | 15 digit, masih dalam batas (maxLength=15) |
       | TC-CHK-06 | BVA Max+1  | 8123456789012345 | 812345678901234 | 16 digit dipotong ke 15 (maxLength)        |
-

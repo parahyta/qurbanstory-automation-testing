@@ -2,8 +2,10 @@
 @product
 Feature: Product Validation
 
-  Scenario: TC-PRD-01 Navigasi ke Detail Produk dari Katalog
+  Background:
     Given user is on the product catalog page
+
+  Scenario: TC-PRD-01 Navigasi ke Detail Produk dari Katalog
     When user clicks "Lihat Detail" on product "Sapi Patungan (Patungan (1/7))"
     Then user should see product detail page with price and stock availability
 
