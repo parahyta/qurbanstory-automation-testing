@@ -34,39 +34,46 @@ public class InvoicePage {
         return status.isDisplayed();
     }
 
-//    private By invoiceNumber =
-//            By.xpath("//span[contains(text(),'Nomor Invoice')]/following-sibling::span");
-//
-//    private By nominal =
-//            By.xpath("//span[contains(text(),'Nominal')]/following-sibling::span");
-//
-//    private By paymentMethod =
-//            By.xpath("//span[contains(text(),'Metode Pembayaran')]/following-sibling::span");
-//
-//    private By transactionDate =
-//            By.xpath("//span[contains(text(),'Tanggal Transaksi')]/following-sibling::span");
-//
-//    public boolean isInvoiceNumberDisplayed() {
-//        return wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(invoiceNumber)
-//        ).isDisplayed();
-//    }
-//
-//    public boolean isNominalDisplayed() {
-//        return wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(nominal)
-//        ).isDisplayed();
-//    }
-//
-//    public boolean isPaymentMethodDisplayed() {
-//        return wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(paymentMethod)
-//        ).isDisplayed();
-//    }
-//
-//    public boolean isTransactionDateDisplayed() {
-//        return wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(transactionDate)
-//        ).isDisplayed();
-//    }
+    public boolean isInvoiceNumberDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'ORD-')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isTransactionAmountDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'Rp')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isPaymentMethodDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[text()='Virtual Account']")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isTransactionDateDisplayed() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[contains(text(),'-')]")
+                )
+        ).isDisplayed();
+    }
+
+    public boolean isPaymentStatusExpired() {
+        WebElement status = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//span[text()='KADALUARSA']")
+                )
+        );
+
+        return status.isDisplayed();
+    }
+
 }
