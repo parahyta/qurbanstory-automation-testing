@@ -4,12 +4,12 @@ End-to-end automation testing project for Qurban Story using Selenium WebDriver,
 
 ## Team Members
 
-| Name                       | Student ID |
-| -------------------------- | ---------- |
-| Syakira                    | NIM        |
-| Okta Alshina Arva Parahyta | NIM        |
-| Nawwaf                     | NIM        |
-| Della                      | NIM        |
+| Name                       | Student ID         |
+| -------------------------- | ------------------ |
+| Syakira Zahratul Firdaus   | 24/541424/SV/24904 |
+| Okta Alshina Arva Parahyta | 24/535154/SV/24161 |
+| Nawwaf Zayyan Musyafa      | 24/540567/SV/24877 |
+| Della Nurizki              | 24/541430/SV/24905 |
 
 ## Technologies
 
